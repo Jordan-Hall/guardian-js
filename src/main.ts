@@ -11,9 +11,19 @@ async function bootstrap() {
   const redisClient = app.get<RedisClient>(RedisClient);
   app.use(identityMiddleware(config, redisClient));
 
+  const whitelist = [
+    'http://localhost:3000',
+    'http://localhost:4000',
+    'http://localhost:4200',
+    'http://localhost:80',
+    'http://localhost:8080',
+  ]
+
+  app.enableCors({
+    origin: whitelist
+  })
+
   await UBServiceFactory.create(app)
-    .withSwagger()
-    .withPrefix('api/v1')
     .withGrpc()
     .withValidation({
       skipMissingProperties: false,
@@ -24,6 +34,13 @@ async function bootstrap() {
     .withSession(true)
     // .withCookie()
     .withPoweredBy()
+    // .hardenedSecurity({
+    //   cors: {
+    //     origin: whitelist
+    //   },
+    // })
+    .withPrefix('api/v1')
+    .withSwagger()
     .start();
 }
 

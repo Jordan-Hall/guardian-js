@@ -30,13 +30,12 @@ export class AccountsService {
       );
     }
 
-    const enableEmail = this.fieldPolicyConfig.email.requireConfirmation && !cmd.email;
-    const enablePhoneNumber =
-      this.fieldPolicyConfig.phoneNumber.requireConfirmation && !cmd.phoneNumber;
-    const requiredEmailOrPhoneNumber =
-      this.featuresConfig.signup.enableVerification && (enableEmail || enablePhoneNumber);
-    if (requiredEmailOrPhoneNumber) {
-      throw new BadRequestException('email or phone number field must be provided');
+    const enableEmail = (this.fieldPolicyConfig?.email?.requireConfirmation && !cmd.email);
+    const enableMobile = (this.fieldPolicyConfig?.mobile?.requireConfirmation && !cmd.mobile);
+    const requiredEmailOrMobile =
+      this.featuresConfig.signup.enableVerification && (enableEmail || enableMobile);
+    if (requiredEmailOrMobile) {
+      throw new BadRequestException('email or mobile field must be provided');
     }
 
     let phoneNumber;

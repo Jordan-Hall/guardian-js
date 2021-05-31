@@ -79,6 +79,21 @@ features:
       length: 6
   enableSoftDelete: true
 
+fieldsPolicy:
+  password:
+    minimumLength: 10
+    requireLowercase: true
+    requireNumbers: true
+    requireUppercase: true
+    requireSymbols: true
+    strength: 3
+  email:
+    requireConfirmation: true
+    required: true
+  mobile:
+    requireConfirmation: false
+    required: true
+
 logging:
   sentry:
     dsn: "https://843971de94ef48aa98cf0e89497c0a55@o439891.ingest.sentry.io/5500481"
