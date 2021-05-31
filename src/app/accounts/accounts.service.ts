@@ -28,8 +28,8 @@ export class AccountsService {
       throw new BadRequestException('email, mobile or username field must be provided');
     }
 
-    const enableEmail = (this.fieldPolicyConfig.email.requireConfirmation && !cmd.email);
-    const enableMobile = (this.fieldPolicyConfig.mobile.requireConfirmation && !cmd.mobile);
+    const enableEmail = (this.fieldPolicyConfig?.email?.requireConfirmation && !cmd.email);
+    const enableMobile = (this.fieldPolicyConfig?.mobile?.requireConfirmation && !cmd.mobile);
     const requiredEmailOrMobile =
       this.featuresConfig.signup.enableVerification && (enableEmail || enableMobile);
     if (requiredEmailOrMobile) {

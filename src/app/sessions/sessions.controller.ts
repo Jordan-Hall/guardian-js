@@ -16,7 +16,7 @@ export class SessionsController {
     @Body() body: CreateSessionRequest,
     @Req() req: IRequest,
   ): Promise<SessionResponse> {
-    return await this.sessionsService.create(body, req.identity);
+    return await this.sessionsService.create(body, req.identity, req.connection?.remoteAddress || req.ip);
   }
 
   @Put('/')

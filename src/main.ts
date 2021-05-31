@@ -9,8 +9,19 @@ async function bootstrap() {
   const config = app.get<ConfigStore>(ConfigStore);
   app.use(identityMiddleware(config));
 
+  const whitelist = [
+    'http://localhost:3000',
+    'http://localhost:4000',
+    'http://localhost:4200',
+    'http://localhost:80',
+    'http://localhost:8080',
+  ]
+
+  app.enableCors({
+    origin: whitelist
+  })
+
   await UBServiceFactory.create(app)
-    .withSwagger()
     .withGrpc()
     .withValidation({
       skipMissingProperties: false,
@@ -21,7 +32,13 @@ async function bootstrap() {
     .withSession(true)
     // .withCookie()
     .withPoweredBy()
+    // .hardenedSecurity({
+    //   cors: {
+    //     origin: whitelist
+    //   },
+    // })
     .withPrefix('api/v1')
+    .withSwagger()
     .start();
 }
 
