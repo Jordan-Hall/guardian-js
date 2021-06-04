@@ -10,6 +10,7 @@ import { JwtService } from '../jwt/jwt.service';
 import { PasswordService } from '../password/password.service';
 import { CreateSessionRequest } from './commands';
 import { SessionResponse } from './queries';
+import {RedisClient} from "@ultimate-backend/redis";
 
 @Injectable()
 export class SessionsService {
@@ -108,7 +109,7 @@ export class SessionsService {
     }
 
     if (this.featuresConfig.auth.enableJwt) {
-      await this.redis.client.set(accountToken, true);
+      await this.redis.client.set(accountToken, true)
     }
 
     await this.datastore.account.setLastLogin(account.id, addr);
