@@ -1,6 +1,6 @@
 datastore:
   databaseName: "guardian_db"
-  databaseUrl: "mongodb://localhost:27017/{{datastore.dbName}}"
+  databaseUrl: "mongodb+srv://dbUser:nOSLjiJZENzDbQo2@lts-cluser.4lnve.mongodb.net/{{datastore.dbName}}"
   redisUrl: "redis://127.0.0.1:6379"
   retryAttempts: 6
   retryDelays: 4
@@ -79,20 +79,6 @@ features:
       length: 6
   enableSoftDelete: true
 
-fieldsPolicy:
-  password:
-    minimumLength: 10
-    requireLowercase: true
-    requireNumbers: true
-    requireUppercase: true
-    requireSymbols: true
-    strength: 3
-  email:
-    requireConfirmation: true
-    required: true
-  mobile:
-    requireConfirmation: false
-    required: true
 
 logging:
   sentry:
