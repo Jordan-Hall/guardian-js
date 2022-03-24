@@ -10,7 +10,6 @@ import { JwtService } from '../jwt/jwt.service';
 import { PasswordService } from '../password/password.service';
 import { CreateSessionRequest } from './commands';
 import { SessionResponse } from './queries';
-import {RedisClient} from "@ultimate-backend/redis";
 
 @Injectable()
 export class SessionsService {

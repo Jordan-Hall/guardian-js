@@ -8,7 +8,6 @@ import * as jwt from 'jsonwebtoken';
 import * as path from 'path';
 import { PrivateClaim, PublicClaim } from '../jwt/jwt.types';
 import { FilesConfig, SecurityConfig } from './guardian.config';
-import {RedisClient} from "@ultimate-backend/redis";
 
 export class Identity {
   constructor(private req: ExpressRequest, private readonly config: ConfigStore, private readonly redis: RedisClient) {}
